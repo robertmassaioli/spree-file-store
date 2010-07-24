@@ -1,0 +1,34 @@
+<h1><%= t('listing_uploaded_files') %></h1>
+
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= t('filename') %></th>
+      <th><%= t('url') %></th>
+      <th><%= t('uploaded_by') %></th>
+      <th><%= t('date_uploaded') %></th>
+      <th><%= t('uploaded_file_actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @uploaded_files.each do |uploaded_file| %>
+    <tr>
+      <td><%= uploaded_file.filename %></td>
+      <td>
+        <%= link_to root_url + uploaded_file.public_filename.sub('/',''), root_url + uploaded_file.public_filename.sub('/','') %>
+      </td>
+      <td><%= uploaded_file.user.email %></td>
+      <td><%= uploaded_file.created_at.to_s(:lond_ordinal) %></td>
+      <td>
+        <%= link_to('Download', download_admin_uploaded_file_path(uploaded_file)) %> |
+        <%= link_to('Delete', [:admin, uploaded_file], :confirm => 'Are you sure?', :method => :delete) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot></tfoot>
+</table>
+    
+<%= will_paginate @uploaded_files %>
+
+<%= button_link_to t('upload_a_new_file'), new_admin_uploaded_file_path, :icon => 'add' %>
