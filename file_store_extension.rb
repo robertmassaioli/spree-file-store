@@ -8,9 +8,8 @@ class FileStoreExtension < Spree::Extension
 
   # Please use file_store/config/routes.rb instead for extension routes.
 
-  def self.require_gems(config)
-    config.gem "haml"
-  end
+  #def self.require_gems(config)
+  #end
   
   def activate
 
